@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../barrel.dart';
@@ -35,7 +36,20 @@ class Environment {
   }
 
   run() async {
+    WidgetsFlutterBinding.ensureInitialized();
     await Injector.registerDependencies();
-    runApp(const ProjectName());
+    await EasyLocalization.ensureInitialized();
+    runApp(
+      EasyLocalization(
+        startLocale: LocaleManager.koLocale,
+        supportedLocales: const [
+          LocaleManager.koLocale,
+          LocaleManager.enLocale,
+        ],
+        path: 'assets/translations',
+        fallbackLocale: LocaleManager.koLocale,
+        child: const ProjectName(),
+      ),
+    );
   }
 }
