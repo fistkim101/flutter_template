@@ -1,4 +1,9 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+
+import '../application/dependency_injection/injector.dart';
 
 class AppName extends StatelessWidget {
   const AppName({super.key});
@@ -29,6 +34,17 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  Future<void> _showPlatformInfo() async {
+    final DeviceInfoPlugin deviceInfoPlugin = Injector.deviceInfoPlugin;
+    if (Platform.isAndroid) {
+      final AndroidDeviceInfo androidInfo = await deviceInfoPlugin.androidInfo;
+    }
+
+    if (Platform.isIOS) {
+      final IosDeviceInfo iosDeviceInfo = await deviceInfoPlugin.iosInfo;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () async {
+          _incrementCounter();
+          await _showPlatformInfo();
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),

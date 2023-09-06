@@ -34,7 +34,8 @@ class Environment {
     }
   }
 
-  run() {
+  run() async {
+    await Injector.registerDependencies();
     runApp(const AppName());
   }
 }

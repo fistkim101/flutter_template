@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/application/application.dart';
 
 void main() {
   runApp(const MyApp());
@@ -68,6 +72,19 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  Future<void> _showPlatformInfo() async {
+    final DeviceInfoPlugin deviceInfoPlugin = Injector.deviceInfoPlugin;
+    if (Platform.isAndroid) {
+      final AndroidDeviceInfo androidInfo = await deviceInfoPlugin.androidInfo;
+      print(androidInfo.toString());
+    }
+
+    if (Platform.isIOS) {
+      final IosDeviceInfo iosDeviceInfo = await deviceInfoPlugin.iosInfo;
+      print(iosDeviceInfo.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -116,7 +133,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () async {
+          _incrementCounter();
+          await _showPlatformInfo();
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
