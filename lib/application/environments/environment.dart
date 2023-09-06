@@ -36,6 +36,6 @@ class Environment {
 
   run() async {
     await Injector.registerDependencies();
-    runApp(const AppName());
+    runApp(const ProjectName());
   }
 }
