@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_template/barrel.dart';
@@ -11,6 +12,9 @@ class Injector {
 
   static Dio get apiClient => GetIt.instance.get<Dio>();
 
+  static ConnectionManager get connectionManager =>
+      GetIt.instance.get<ConnectionManager>();
+
   static Future registerDependencies() async {
     _registerUtils();
     _registerNetworks();
@@ -20,6 +24,8 @@ class Injector {
   static _registerUtils() async {
     GetIt.instance
         .registerLazySingleton<DeviceInfoPlugin>(() => DeviceInfoPlugin());
+    GetIt.instance.registerLazySingleton<ConnectionManager>(
+        () => ConnectionManager(connectivity: Connectivity()));
   }
 
   static _registerNetworks() async {
@@ -33,5 +39,12 @@ class Injector {
     );
   }
 
-  static _registerRepositories() async {}
+  static _registerRepositories() async {
+    GetIt.instance.registerLazySingleton<UserRepository>(
+      () => UserRepository(
+        apiClient: apiClient,
+        connectionManager: connectionManager,
+      ),
+    );
+  }
 }
