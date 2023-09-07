@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../barrel.dart';
@@ -14,7 +14,7 @@ class BaseHeaderInterceptor extends InterceptorsWrapper {
     await _setHeaderWithAccessToken(options.headers);
     await _setHeaderWithPackageInfo(options.headers);
     await _setHeaderWithDeviceInfo(options.headers);
-    await _setHeaderWithPushToken(options.headers);
+    // await _setHeaderWithPushToken(options.headers);
 
     super.onRequest(options, handler);
   }
@@ -57,8 +57,8 @@ class BaseHeaderInterceptor extends InterceptorsWrapper {
     }
   }
 
-  Future<void> _setHeaderWithPushToken(Map<String, dynamic> headers) async {
-    String? pushToken = await FirebaseMessaging.instance.getToken();
-    headers['push-token'] = pushToken ?? '';
-  }
+  // Future<void> _setHeaderWithPushToken(Map<String, dynamic> headers) async {
+  //   String? pushToken = await FirebaseMessaging.instance.getToken();
+  //   headers['push-token'] = pushToken ?? '';
+  // }
 }
