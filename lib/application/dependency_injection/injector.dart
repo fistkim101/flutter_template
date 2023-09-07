@@ -1,4 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_template/barrel.dart';
 import 'package:get_it/get_it.dart';
 
 class Injector {
@@ -6,6 +8,8 @@ class Injector {
 
   static DeviceInfoPlugin get deviceInfoPlugin =>
       GetIt.instance.get<DeviceInfoPlugin>();
+
+  static Dio get apiClient => GetIt.instance.get<Dio>();
 
   static Future registerDependencies() async {
     _registerUtils();
@@ -18,7 +22,17 @@ class Injector {
         .registerLazySingleton<DeviceInfoPlugin>(() => DeviceInfoPlugin());
   }
 
-  static _registerNetworks() async {}
+  static _registerNetworks() async {
+    GetIt.instance.registerLazySingleton<Dio>(
+      () => ApiClient(
+        clientBaseUrl: Environment.baseUrl,
+        customInterceptors: [
+          BaseHeaderInterceptor(),
+          // TokenInterceptor(),
+        ],
+      ),
+    );
+  }
 
   static _registerRepositories() async {}
 }
