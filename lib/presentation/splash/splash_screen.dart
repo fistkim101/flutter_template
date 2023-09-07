@@ -8,6 +8,13 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Injector.apiClient.get('/category/1').then((value) {
+            print(value.data);
+          });
+        },
+      ),
       body: Center(
         child: Text(TextManager.serviceName.tr()),
       ),

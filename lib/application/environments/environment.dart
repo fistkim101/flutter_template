@@ -25,7 +25,7 @@ class Environment {
   static get baseUrl {
     switch (_instance!._environmentType) {
       case EnvironmentType.LOCAL:
-        return 'http://localhost:8080';
+        return 'http://192.168.35.104:9000';
       case EnvironmentType.DEVELOPMENT:
         return 'https://dev.example.com';
       case EnvironmentType.PRODUCTION:
