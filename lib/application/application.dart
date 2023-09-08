@@ -3,3 +3,4 @@ export 'routes/routes.dart';
 export 'types/types.dart';
 export 'utils/utils.dart';
 export 'environments/environment.dart';
+export 'extensions/extensions.dart';
