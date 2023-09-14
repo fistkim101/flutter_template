@@ -9,6 +9,7 @@
 //   Future<void> onError(
 //       DioException err, ErrorInterceptorHandler handler) async {
 //     if (err.response?.statusCode == 401 &&
+//         err.response?.data is Map &&
 //         err.response?.data['code'] == 'AU01') {
 //       final String? refreshToken = await AccessManager.getRefreshToken();
 //

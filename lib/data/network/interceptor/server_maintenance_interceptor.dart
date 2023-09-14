@@ -12,6 +12,7 @@
 //   Future<void> onError(
 //       DioException err, ErrorInterceptorHandler handler) async {
 //     if (err.response?.statusCode == 503 &&
+//         err.response?.data is Map &&
 //         err.response?.data['code'] == 'SY01') {
 //       BasicDialog.show(
 //           context: RouterConfiguration.navigatorKey.currentContext!,
