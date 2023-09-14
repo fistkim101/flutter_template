@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../barrel.dart';
+import '../../presentation/app_version_check/app_version_check_screen.dart';
+import '../../presentation/system_maintenance/system_maintenance_screen.dart';
 import '../environments/environment.dart';
 
 class RouterConfiguration {
@@ -12,6 +14,22 @@ class RouterConfiguration {
     name: RouterLocation.signIn,
     builder: (context, state) {
       return const SignInScreen();
+    },
+  );
+
+  static final GoRoute systemMaintenance = GoRoute(
+    path: RouterLocation.systemMaintenance,
+    name: RouterLocation.systemMaintenance,
+    builder: (context, state) {
+      return const SystemMaintenanceScreen();
+    },
+  );
+
+  static final GoRoute appVersionUpdate = GoRoute(
+    path: RouterLocation.appVersionUpdate,
+    name: RouterLocation.appVersionUpdate,
+    builder: (context, state) {
+      return const AppVersionCheckScreen();
     },
   );
 

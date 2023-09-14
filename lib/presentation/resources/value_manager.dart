@@ -53,11 +53,11 @@ class ValueManager {
     return MediaQuery.of(context).padding.top;
   }
 
-  static double maxHeight(BuildContext context) {
+  static double screenHeight(BuildContext context) {
     return MediaQuery.of(context).size.height;
   }
 
-  static double maxWidth(BuildContext context) {
+  static double screenWidth(BuildContext context) {
     return MediaQuery.of(context).size.width;
   }
 }
